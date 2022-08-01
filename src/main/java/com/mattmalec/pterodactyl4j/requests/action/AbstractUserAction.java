@@ -30,6 +30,7 @@ public abstract class AbstractUserAction extends PteroActionImpl<ApplicationUser
     protected String firstName;
     protected String lastName;
     protected String password;
+    protected String externalId;
 
     public AbstractUserAction(PteroApplicationImpl impl, Route.CompiledRoute route) {
         super(impl.getP4J(), route, (response, request) -> new ApplicationUserImpl(response.getObject(), impl));
@@ -62,6 +63,12 @@ public abstract class AbstractUserAction extends PteroActionImpl<ApplicationUser
     @Override
     public UserAction setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    @Override
+    public UserAction setExternalId(String externalId) {
+        this.externalId = externalId;
         return this;
     }
 }

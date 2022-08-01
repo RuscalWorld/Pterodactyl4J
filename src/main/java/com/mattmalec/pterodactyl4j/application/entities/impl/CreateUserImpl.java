@@ -40,6 +40,7 @@ public class CreateUserImpl extends AbstractUserAction {
         json.put("first_name", firstName);
         json.put("last_name", lastName);
         json.put("password", password);
+        json.put("external_id", externalId);
         return getRequestBody(json);
     }
 }

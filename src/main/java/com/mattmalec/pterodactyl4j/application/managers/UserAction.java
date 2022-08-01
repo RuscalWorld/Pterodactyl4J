@@ -106,4 +106,14 @@ public interface UserAction extends PteroAction<ApplicationUser> {
 	 */
 	UserAction setPassword(String password);
 
+	/**
+	 * Sets the external ID for this {@link com.mattmalec.pterodactyl4j.application.entities.ApplicationUser ApplicationUser}.
+	 *
+	 * @param  externalId
+	 *         The external ID for the ApplicationUser
+	 *
+	 * @return The {@link com.mattmalec.pterodactyl4j.application.managers.UserAction UserAction}
+	 * instance, useful for chaining
+	 */
+	UserAction setExternalId(String externalId);
 }

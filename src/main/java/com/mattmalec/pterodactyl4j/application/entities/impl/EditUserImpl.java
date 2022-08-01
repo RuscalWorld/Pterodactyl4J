@@ -39,6 +39,7 @@ public class EditUserImpl extends AbstractUserAction {
         json.put("first_name", firstName == null ? user.getFirstName() : firstName);
         json.put("last_name", lastName == null ? user.getLastName() : lastName);
         json.put("password", password);
+        json.put("external_id", externalId == null ? user.getExternalId() : externalId);
         return getRequestBody(json);
     }
 }
