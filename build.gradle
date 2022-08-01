@@ -165,11 +165,10 @@ publishing {
 
             repositories {
                 maven {
-                    name 'Jenkins'
-                    url  'https://repo.mattmalec.com/repository/releases'
+                    url = 'https://maven.ruscal.world/releases'
                     credentials {
-                        username = System.getenv('jenkinsUsername')
-                        password = System.getenv('jenkinsPassword')
+                        username = System.getenv("USERNAME") == null ? MavenUsername : System.getenv("USERNAME")
+                        password = System.getenv("PASSWORD") == null ? MavenPassword : System.getenv("PASSWORD")
                     }
                 }
             }
