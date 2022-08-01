@@ -78,6 +78,24 @@ public interface PteroApplication {
 	}
 
 	/**
+	 * Retrieves an individual ApplicationUser represented by the provided external id from Pterodactyl instance
+	 * <br>This requires an <b>Application API key</b> with the <b>Users</b> permission with <b>Read</b> access.
+	 *
+	 * @param  externalId
+	 *         The external user id
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.LoginException
+	 *         If the API key is incorrect or doesn't have the required permissions
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.NotFoundException
+	 * 		   If the user cannot be found
+	 *
+	 * @return {@link com.mattmalec.pterodactyl4j.PteroAction PteroAction} - Type {@link com.mattmalec.pterodactyl4j.application.entities.ApplicationUser ApplicationUsers}
+	 */
+	PteroAction<ApplicationUser> retrieveUserByExternalId(String externalId);
+
+
+	/**
 	 * Retrieves ApplicationUsers matching the provided username from Pterodactyl instance
 	 * <br>This requires an <b>Application API key</b> with the <b>Users</b> permission with <b>Read</b> access.
 	 *

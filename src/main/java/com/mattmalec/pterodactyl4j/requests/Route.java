@@ -29,6 +29,7 @@ public class Route {
 
 		public static final Route LIST_USERS  			= new Route(GET,    APPLICATION_PREFIX + "users?include=servers");
 		public static final Route GET_USER    			= new Route(GET,    APPLICATION_PREFIX + "users/{user_id}?include=servers");
+		public static final Route GET_USER_EXTERNAL		= new Route(GET,    APPLICATION_PREFIX + "users/external/{external_id}?include=servers");
 		public static final Route CREATE_USER 			= new Route(POST,   APPLICATION_PREFIX + "users");
 		public static final Route EDIT_USER   			= new Route(PATCH,  APPLICATION_PREFIX + "users/{user_id}");
 		public static final Route DELETE_USER 			= new Route(DELETE, APPLICATION_PREFIX + "users/{user_id}");

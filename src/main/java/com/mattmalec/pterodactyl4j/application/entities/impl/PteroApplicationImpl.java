@@ -53,6 +53,12 @@ public class PteroApplicationImpl implements PteroApplication {
 	}
 
 	@Override
+	public PteroAction<ApplicationUser> retrieveUserByExternalId(String externalId) {
+		return PteroActionImpl.onRequestExecute(api, Route.Users.GET_USER_EXTERNAL.compile(externalId),
+				(response, request) -> new ApplicationUserImpl(response.getObject(), this));
+	}
+
+	@Override
 	public PaginationAction<ApplicationUser> retrieveUsers() {
 		return PaginationResponseImpl.onPagination(api, Route.Users.LIST_USERS.compile(),
 				(object) -> new ApplicationUserImpl(object, this));
