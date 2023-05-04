@@ -16,6 +16,7 @@
 
 package com.mattmalec.pterodactyl4j.requests;
 
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import okhttp3.RequestBody;
 
@@ -27,10 +28,11 @@ public class RequestFuture<T> extends CompletableFuture<T> {
 			PteroActionImpl<T> action,
 			Route.CompiledRoute route,
 			RequestBody requestBody,
+			HashMap<String, String> queryParams,
 			boolean shouldQueue,
 			long deadline) {
 		this.request = new Request<>(
-				action, this::complete, this::completeExceptionally, route, requestBody, shouldQueue, deadline);
+				action, this::complete, this::completeExceptionally, queryParams, route, requestBody, shouldQueue, deadline);
 		action.getP4J().getRequester().request(this.request);
 	}
 

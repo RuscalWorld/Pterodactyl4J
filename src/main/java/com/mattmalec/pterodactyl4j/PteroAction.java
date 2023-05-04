@@ -209,6 +209,19 @@ public interface PteroAction<T> {
 	PteroAction<T> deadline(long timestamp);
 
 	/**
+	 * Adds a query parameter to the request.
+	 *
+	 * @param 	key
+	 * 			Name of the query parameter
+	 *
+	 * @param 	value
+	 * 			Value of the query parameter
+	 *
+	 * @return The same PteroAction with added query parameter
+	 */
+	PteroAction<T> withQueryParam(String key, String value);
+
+	/**
 	 * Intermediate operator that returns a modified PteroAction.
 	 *
 	 * <p>This does not modify the instance but returns a new PteroAction which will apply

@@ -122,6 +122,9 @@ public interface PaginationAction<T> extends PteroAction<List<T>>, Iterable<T> {
 	@Override
 	PaginationAction<T> deadline(long timestamp);
 
+	@Override
+	PaginationAction<T> withQueryParam(String key, String value);
+
 	/**
 	 * The current amount of cached entities for this PaginationAction
 	 *

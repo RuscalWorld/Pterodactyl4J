@@ -20,6 +20,8 @@ import com.mattmalec.pterodactyl4j.PteroAction;
 import com.mattmalec.pterodactyl4j.entities.P4J;
 import com.mattmalec.pterodactyl4j.exceptions.PteroException;
 import com.mattmalec.pterodactyl4j.utils.P4JLogger;
+
+import java.util.HashMap;
 import java.util.concurrent.CompletionException;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -38,6 +40,7 @@ public class PteroActionImpl<T> implements PteroAction<T> {
 	private final RequestBody data;
 	private long deadline = 0;
 	private final BiFunction<Response, Request<T>, T> handler;
+	private final HashMap<String, String> queryParams = new HashMap<>();
 
 	public static <T> DeferredPteroAction<T> onExecute(P4J api, Supplier<? extends T> supplier) {
 		return new DeferredPteroAction<>(api, supplier);
@@ -94,7 +97,7 @@ public class PteroActionImpl<T> implements PteroAction<T> {
 		Route.CompiledRoute route = finalizeRoute();
 		RequestBody data = finalizeData();
 		try {
-			return new RequestFuture<>(this, route, data, shouldQueue, deadline).join();
+			return new RequestFuture<>(this, route, data, queryParams, shouldQueue, deadline).join();
 		} catch (CompletionException ex) {
 			if (ex.getCause() != null) {
 				Throwable cause = ex.getCause();
@@ -116,13 +119,19 @@ public class PteroActionImpl<T> implements PteroAction<T> {
 		api.getActionPool().submit(() -> {
 			RequestBody data = finalizeData();
 			api.getRequester()
-					.request(new Request<>(this, finalizedSuccess, finalizedFailure, route, data, true, deadline));
+					.request(new Request<>(this, finalizedSuccess, finalizedFailure, queryParams, route, data, true, deadline));
 		});
 	}
 
 	@Override
 	public PteroAction<T> deadline(long timestamp) {
 		this.deadline = timestamp;
+		return this;
+	}
+
+	@Override
+	public PteroAction<T> withQueryParam(String key, String value) {
+		queryParams.put(key, value);
 		return this;
 	}
 

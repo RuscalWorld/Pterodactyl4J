@@ -16,6 +16,7 @@
 
 package com.mattmalec.pterodactyl4j.requests.action.impl;
 
+import com.mattmalec.pterodactyl4j.PteroAction;
 import com.mattmalec.pterodactyl4j.entities.P4J;
 import com.mattmalec.pterodactyl4j.requests.PaginationAction;
 import com.mattmalec.pterodactyl4j.requests.PteroActionImpl;
@@ -91,6 +92,11 @@ public abstract class PaginationActionImpl<T> extends PteroActionImpl<List<T>> i
 	@Override
 	public PaginationAction<T> deadline(long timestamp) {
 		return (PaginationAction<T>) super.deadline(timestamp);
+	}
+
+	@Override
+	public PaginationAction<T> withQueryParam(String key, String value) {
+		return (PaginationAction<T>) super.withQueryParam(key, value);
 	}
 
 	@Override

@@ -53,4 +53,9 @@ public class DeferredPteroAction<T> implements PteroAction<T> {
 	public PteroAction<T> deadline(long timestamp) {
 		return this;
 	}
+
+	@Override
+	public PteroAction<T> withQueryParam(String key, String value) {
+		return this;
+	}
 }

@@ -20,8 +20,12 @@ import com.mattmalec.pterodactyl4j.entities.P4J;
 import com.mattmalec.pterodactyl4j.exceptions.HttpException;
 import com.mattmalec.pterodactyl4j.exceptions.LoginException;
 import com.mattmalec.pterodactyl4j.utils.P4JLogger;
+
+import java.io.UnsupportedEncodingException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.net.URLEncoder;
+import java.util.Map;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -81,10 +85,22 @@ public class Requester {
 
 		if (api.getApplicationUrl() == null || api.getApplicationUrl().isEmpty())
 			throw new HttpException("No Pterodactyl URL was defined.");
+
+        String[] params = new String[apiRequest.getParams().size() * 2];
+        int i = 0;
+        try {
+            for (Map.Entry<String, String> entry : apiRequest.getParams().entrySet()) {
+                params[i] = URLEncoder.encode(entry.getKey(), "UTF-8");
+                params[++i] = URLEncoder.encode(entry.getValue(), "UTF-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
 		String applicationUrl = api.getApplicationUrl();
 		if (applicationUrl.endsWith("/")) applicationUrl = applicationUrl.substring(0, applicationUrl.length() - 1);
 		String url = String.format(PTERODACTYL_API_PREFIX, applicationUrl)
-				+ apiRequest.getRoute().getCompiledRoute();
+				+ apiRequest.getRoute().withQueryParams(params).getCompiledRoute();
 
 		builder.url(url);
 		String method = route.getMethod().toString();

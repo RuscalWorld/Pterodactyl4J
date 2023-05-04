@@ -38,6 +38,11 @@ public class MapPteroAction<I, O> extends PteroActionOperator<I, O> {
 	}
 
 	@Override
+	public PteroAction<O> withQueryParam(String key, String value) {
+		return this;
+	}
+
+	@Override
 	public O execute(boolean shouldQueue) {
 		return function.apply(action.execute(shouldQueue));
 	}

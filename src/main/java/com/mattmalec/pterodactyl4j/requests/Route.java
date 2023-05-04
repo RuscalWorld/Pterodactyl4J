@@ -301,7 +301,6 @@ public class Route {
 		}
 
 		public CompiledRoute withQueryParams(String... params) {
-			Checks.check(params.length >= 2, "Params length must be at least 2");
 			Checks.check(params.length % 2 == 0, "Params length must be a multiple of 2");
 
 			boolean hasQueryParams = compiledRoute.contains("?");

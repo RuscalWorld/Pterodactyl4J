@@ -50,6 +50,11 @@ public class MapErrorPteroAction<T> extends PteroActionOperator<T, T> {
 	}
 
 	@Override
+	public PteroAction<T> withQueryParam(String key, String value) {
+		return this;
+	}
+
+	@Override
 	public T execute(boolean shouldQueue) {
 		try {
 			return action.execute(shouldQueue);

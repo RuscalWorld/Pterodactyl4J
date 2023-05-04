@@ -17,6 +17,8 @@
 package com.mattmalec.pterodactyl4j.requests;
 
 import com.mattmalec.pterodactyl4j.exceptions.*;
+
+import java.util.HashMap;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
@@ -27,6 +29,7 @@ public class Request<T> {
 	private final PteroActionImpl<T> action;
 	private final Consumer<? super T> onSuccess;
 	private final Consumer<? super Throwable> onFailure;
+	private final HashMap<String, String> params;
 	private final Route.CompiledRoute route;
 	private final RequestBody requestBody;
 	private final boolean shouldQueue;
@@ -43,9 +46,22 @@ public class Request<T> {
 			RequestBody requestBody,
 			boolean shouldQueue,
 			long deadline) {
+		this(action, onSuccess, onFailure, new HashMap<>(), route, requestBody, shouldQueue, deadline);
+	}
+
+	public Request(
+			PteroActionImpl<T> action,
+			Consumer<? super T> onSuccess,
+			Consumer<? super Throwable> onFailure,
+			HashMap<String, String> params,
+			Route.CompiledRoute route,
+			RequestBody requestBody,
+			boolean shouldQueue,
+			long deadline) {
 		this.action = action;
 		this.onSuccess = onSuccess;
 		this.onFailure = onFailure;
+		this.params = params;
 		this.route = route;
 		this.requestBody = requestBody;
 		this.shouldQueue = shouldQueue;
@@ -149,5 +165,9 @@ public class Request<T> {
 
 	public void handleResponse(Response response) {
 		action.handleResponse(response, this);
+	}
+
+	public HashMap<String, String> getParams() {
+		return params;
 	}
 }
