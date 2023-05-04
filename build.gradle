@@ -167,8 +167,8 @@ publishing {
                 maven {
                     url = 'https://maven.ruscal.world/releases'
                     credentials {
-                        username = System.getenv("USERNAME") == null ? MavenUsername : System.getenv("USERNAME")
-                        password = System.getenv("PASSWORD") == null ? MavenPassword : System.getenv("PASSWORD")
+                        username = System.getenv("USERNAME") == null ? MavenReleasesUsername : System.getenv("USERNAME")
+                        password = System.getenv("PASSWORD") == null ? MavenReleasesPassword : System.getenv("PASSWORD")
                     }
                 }
             }
