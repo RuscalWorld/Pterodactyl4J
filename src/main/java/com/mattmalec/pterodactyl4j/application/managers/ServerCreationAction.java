@@ -27,6 +27,7 @@ public interface ServerCreationAction extends PteroAction<ApplicationServer> {
 	ServerCreationAction setName(String name);
 
 	ServerCreationAction setDescription(String description);
+	ServerCreationAction setExternalId(String externalId);
 
 	ServerCreationAction setOwner(ApplicationUser owner);
 

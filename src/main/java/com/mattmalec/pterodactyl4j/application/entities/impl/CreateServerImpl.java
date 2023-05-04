@@ -35,6 +35,7 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 
 	private String name;
 	private String description;
+	private String externalId;
 	private ApplicationUser owner;
 	private ApplicationEgg egg;
 	private String dockerImage;
@@ -77,6 +78,12 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 	@Override
 	public ServerCreationAction setDescription(String description) {
 		this.description = description;
+		return this;
+	}
+
+	@Override
+	public ServerCreationAction setExternalId(String externalId) {
+		this.externalId = externalId;
 		return this;
 	}
 
@@ -263,6 +270,7 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 		JSONObject obj = new JSONObject()
 				.put("name", name)
 				.put("description", description)
+				.put("external_id", externalId)
 				.put("user", owner.getId())
 				.put("nest", nest.getId())
 				.put("egg", egg.getId())
