@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 Matt Malec, and the Pterodactyl4J contributors
+ *    Copyright 2021-2022 Matt Malec, and the Pterodactyl4J contributors
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package com.mattmalec.pterodactyl4j.requests.action;
 
-import com.mattmalec.pterodactyl4j.requests.PteroActionImpl;
 import com.mattmalec.pterodactyl4j.application.entities.ApplicationUser;
 import com.mattmalec.pterodactyl4j.application.entities.impl.ApplicationUserImpl;
 import com.mattmalec.pterodactyl4j.application.entities.impl.PteroApplicationImpl;
 import com.mattmalec.pterodactyl4j.application.managers.UserAction;
+import com.mattmalec.pterodactyl4j.requests.PteroActionImpl;
 import com.mattmalec.pterodactyl4j.requests.Route;
 
 public abstract class AbstractUserAction extends PteroActionImpl<ApplicationUser> implements UserAction {
@@ -32,39 +32,39 @@ public abstract class AbstractUserAction extends PteroActionImpl<ApplicationUser
     protected String password;
     protected String externalId;
 
-    public AbstractUserAction(PteroApplicationImpl impl, Route.CompiledRoute route) {
-        super(impl.getP4J(), route, (response, request) -> new ApplicationUserImpl(response.getObject(), impl));
-    }
+	public AbstractUserAction(PteroApplicationImpl impl, Route.CompiledRoute route) {
+		super(impl.getP4J(), route, (response, request) -> new ApplicationUserImpl(response.getObject(), impl));
+	}
 
-    @Override
-    public UserAction setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
+	@Override
+	public UserAction setUserName(String userName) {
+		this.userName = userName;
+		return this;
+	}
 
-    @Override
-    public UserAction setEmail(String email) {
-        this.email = email;
-        return this;
-    }
+	@Override
+	public UserAction setEmail(String email) {
+		this.email = email;
+		return this;
+	}
 
-    @Override
-    public UserAction setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
+	@Override
+	public UserAction setFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
 
-    @Override
-    public UserAction setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
+	@Override
+	public UserAction setLastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
 
-    @Override
-    public UserAction setPassword(String password) {
-        this.password = password;
-        return this;
-    }
+	@Override
+	public UserAction setPassword(String password) {
+		this.password = password;
+		return this;
+	}
 
     @Override
     public UserAction setExternalId(String externalId) {
