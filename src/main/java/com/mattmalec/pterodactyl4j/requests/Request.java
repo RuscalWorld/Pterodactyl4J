@@ -82,6 +82,10 @@ public class Request<T> {
 	}
 
 	public void setOnFailure(Response response) {
+		if (response.getException() != null) {
+			onFailure(response.getException());
+		}
+
 		if (response.isRateLimit()) {
 			onFailure(new RateLimitedException(route, response.getRetryAfter()));
 		} else
