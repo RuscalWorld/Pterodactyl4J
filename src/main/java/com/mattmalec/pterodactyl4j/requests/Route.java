@@ -94,13 +94,13 @@ public class Route {
 
 	public static class Nests {
 
-		public static final Route LIST_NESTS = new Route(GET, APPLICATION_PREFIX + "nests?include=servers,eggs");
+		public static final Route LIST_NESTS = new Route(GET, APPLICATION_PREFIX + "nests");
 		public static final Route GET_NEST =
-				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}?include=servers,eggs");
+				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}");
 		public static final Route GET_EGGS =
-				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}/eggs?include=variables,nest,servers");
+				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}/eggs?include=variables,nest");
 		public static final Route GET_EGG =
-				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}/eggs/{egg_id}?include=variables,nest,servers");
+				new Route(GET, APPLICATION_PREFIX + "nests/{nest_id}/eggs/{egg_id}?include=variables,nest");
 	}
 
 	public static class Client {
