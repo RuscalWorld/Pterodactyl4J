@@ -86,4 +86,6 @@ public interface ServerCreationAction extends PteroAction<ApplicationServer> {
 	ServerCreationAction startOnCompletion(boolean start);
 
 	ServerCreationAction skipScripts(boolean skip);
+
+	ServerCreationAction setOomDisabled(boolean oomDisabled);
 }

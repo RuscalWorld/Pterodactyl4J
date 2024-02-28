@@ -55,6 +55,7 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 	private boolean useDedicatedIP;
 	private boolean startOnCompletion;
 	private boolean skipScripts;
+	private boolean oomDisabled;
 	private ApplicationAllocation defaultAllocation;
 	private Collection<ApplicationAllocation> additionalAllocations;
 
@@ -202,6 +203,12 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 	}
 
 	@Override
+	public ServerCreationAction setOomDisabled(boolean oomDisabled) {
+		this.oomDisabled = oomDisabled;
+		return this;
+	}
+
+	@Override
 	public ServerCreationAction setAllocations(
 			ApplicationAllocation defaultAllocation, Collection<ApplicationAllocation> additionalAllocations) {
 		this.defaultAllocation = defaultAllocation;
@@ -282,7 +289,8 @@ public class CreateServerImpl extends PteroActionImpl<ApplicationServer> impleme
 				.put("deploy", (locations != null || portRange != null) ? deploy : null)
 				.put("allocation", allocation)
 				.put("start_on_completion", startOnCompletion)
-				.put("skip_scripts", skipScripts);
+				.put("skip_scripts", skipScripts)
+				.put("oom_disabled", oomDisabled);
 		return getRequestBody(obj);
 	}
 
