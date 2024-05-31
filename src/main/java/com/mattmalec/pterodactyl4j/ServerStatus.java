@@ -26,6 +26,7 @@ import com.mattmalec.pterodactyl4j.application.entities.ApplicationServer;
 public enum ServerStatus {
 	INSTALLING,
 	INSTALL_FAILED,
+	REINSTALL_FAILED,
 	SUSPENDED,
 	RESTORING_BACKUP,
 	UNKNOWN
